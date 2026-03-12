@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veterinary Dermatophytosis | Professional Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="table.css">
+<style>
+:root {
+    --primary-color: #00e0ff;
+    --secondary-color: #ffb400;
+    --bg-dark: #0b0f1a;
+    --text-light: #f0f0f0;
+    --font-main: 'Source Sans Pro', sans-serif;
+    --font-title: 'Playfair Display', serif;
+}
+
+body {
+    margin:0; padding:0; box-sizing:border-box;
+    font-family: var(--font-main);
+    color: var(--text-light);
+    background: linear-gradient(180deg,#0b0f1a,#10182a,#0b0f1a);
+    overflow-x: hidden;
+    line-height: 1.8;
+}
+
+#bacteriaCanvas { position:fixed; top:0; left:0; z-index:-3; }
+
+/* Navbar */
+.navbar {
+    position:fixed; width:100%; top:0; display:flex;
+    align-items:center; justify-content:space-between;
+    padding:15px 50px; background:rgba(5,10,20,0.9);
+    backdrop-filter:blur(10px); z-index:100;
+    border-bottom: 1px solid rgba(0,255,166,0.2);
+}
+.logo { font-family: var(--font-title); color: var(--primary-color); font-size: 22px; letter-spacing: 1px; }
+nav a { text-decoration:none; color:white; margin-left: 20px; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
+nav a:hover { color: var(--primary-color); }
+
+/* Hero */
+.hero { height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; }
+.bg-video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-2; filter: brightness(0.5) contrast(1.2); }
+.hero h1 { font-family: var(--font-title); font-size: 75px; margin-bottom: 20px; }
+.hero span { color: var(--primary-color); }
+#exploreBtn{
+    margin-top:30px; padding:15px 40px; font-size:18px;
+    border:none; border-radius:50px; cursor:pointer; font-weight:bold; letter-spacing:1px;
+    background: linear-gradient(45deg,#00e0ff,#00ffa6);
+    color:#001018;
+    box-shadow:0 0 20px rgba(0,255,200,0.4); transition:0.3s;
+}
+#exploreBtn:hover{
+    transform:scale(1.1); box-shadow:0 0 40px rgba(0,255,200,0.8);
+}
+
+/* Sections */
+.container { max-width: 1200px; margin:0 auto; padding:50px 20px; }
+
+.presentation-section {
+    display: flex; align-items: flex-start; gap:50px; margin-bottom:100px;
+    background: rgba(255,255,255,0.07); padding:40px;
+    border-radius: 30px; border-left: 5px solid var(--primary-color);
+    transition: 0.4s;
+}
+.presentation-section:hover { background: rgba(255,255,255,0.12); transform: scale(1.02); }
+.presentation-section.reverse { flex-direction: row-reverse; border-left: none; border-right: 5px solid var(--primary-color); }
+
+.text-content { flex:1; }
+.text-content h2 { font-family: var(--font-title); font-size:48px; color: var(--primary-color); margin-bottom:25px; }
+.text-content h3 { font-family: var(--font-title); font-size:28px; color: var(--secondary-color); margin-bottom:15px; }
+.text-content p { font-size:18px; margin-bottom:15px; text-align: justify; }
+.text-content ul, .text-content ol { padding-left:20px; margin-bottom:15px; }
+.text-content li { margin-bottom:10px; font-size:17px; }
+
+.image-content { flex:1; display:flex; flex-wrap:wrap; gap:15px; justify-content:center; }
+.image-content img {
+    flex:1 1 45%; max-width:45%; height:auto; border-radius:12px;
+    box-shadow:0 0 25px rgba(0,255,166,0.2); border:1px solid rgba(255,255,255,0.1);
+}
+
+/* Video Highlight */
+.video-highlight { text-align:center; padding:100px 0; background:#0b1325; }
+.video-container video { width:80%; border-radius:20px; border:2px solid var(--primary-color); }
+
+/* Credits & Footer */
+.credits-box { background: rgba(0,0,0,0.6); padding:30px; border-radius:20px; border:1px solid var(--primary-color); }
+.students { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:15px; }
+.students span { font-size:12px; background: rgba(255,255,255,0.1); padding:5px 12px; border-radius:5px; }
+footer { padding:40px; text-align:center; opacity:0.6; font-size:14px; }
+
+/* Responsive */
+@media (max-width:900px) {
+    .presentation-section, .presentation-section.reverse { flex-direction: column; text-align:center; }
+    .hero h1 { font-size:45px; }
+    .image-content img { max-width:100%; flex:1 1 100%; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="bacteriaCanvas"></canvas>
+
+<header class="navbar">
+    <div class="logo">VET. DERMATOPHYTOSIS</div>
+    <nav>
+        <a href="#about">Definition</a>
+        <a href="#species">Pathogens</a>
+        <a href="#pathogenesis">Mechanism</a>
+        <a href="#clinical">Clinical</a>
+        <a href="#diagnosis">Diagnosis</a>
+        <a href="#treatment">Treatment</a>
+        <a href="#prevention">Prevention</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <video autoplay muted loop playsinline class="bg-video">
+        <source src="bacteria.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    <div class="hero-content">
+        <h1><span>Dermatophytosis</span></h1>
+        <div class="credits-box">
+            <h3>Under Supervision of: DR. WAFAA A. ALI</h3>
+            <p>Prepared by Students:</p>
+            <div class="students">
+                <span>EMAN ELSHERBINY</span> <span>REWAN MOHAMED</span> <span>MALAK AMGAD</span> 
+                <span>HNAN MANSOUR</span> <span>HANAA SALAMA</span> <span>SHAHD MOHAMED</span> 
+                <span>SHAMS ABDELKADER</span> <span>NADA WALEED</span>
+            </div>
+        </div>
+        <button id="exploreBtn">Start Scientific Journey</button>
+    </div>
+</section>
+
+<div class="container">
+
+<!-- ================= ABOUT / DEFINITION ================= -->
+<section class="presentation-section" id="about">
+<div class="text-content">
+<h2>Scientific Definition</h2>
+<h3>What is Dermatophytosis?</h3>
+<p>Dermatophytosis, commonly known as <strong>Ringworm</strong>, is a superficial fungal infection affecting keratinized tissues including hair, skin, and claws. The fungi responsible are <strong>keratinophilic</strong>, meaning they utilize keratin as their primary nutrient. This adaptation allows them to persist on surfaces that are typically resistant to other microorganisms.</p>
+
+<h3>Impact on Animals & Humans</h3>
+<ul>
+<li>Manifestations differ by species, age, immune status, and environment.</li>
+<li><strong>Zoonotic potential:</strong> Can spread to humans, especially in multi-animal households or clinics.</li>
+<li>Young and immunocompromised animals are more susceptible.</li>
+</ul>
+
+<h3>Clinical Awareness</h3>
+<p>The infection often begins with subtle signs, making awareness and detailed clinical observation essential. Dermatophytosis affects animal health and also poses a public health concern in households, clinics, and livestock farms.</p>
+</div>
+<div class="image-content">
+<img src="https://i.pinimg.com/736x/06/69/41/066941fc8e015b2483fff047d846cfbb.jpg" alt="Fungal Microscopy">
+<img src="https://i.pinimg.com/1200x/69/12/64/691264ae3d4e8476af7a709f758f9176.jpg" alt="Ringworm Skin Patch">
+<img src="https://www.shutterstock.com/image-photo/dermatophyte-test-medium-dtm-culture-260nw-1882767274.jpg" 
+</div>
+</section>
+
+<!-- ================= PATHOGENESIS ================= -->
+<section class="presentation-section reverse" id="pathogenesis">
+<div class="text-content">
+<h2>Mechanism of Infection</h2>
+<h3>Infection Process</h3>
+<ul>
+<li><strong>Adherence:</strong> Arthrospores attach to corneocytes via specific adhesion molecules.</li>
+<li><strong>Germination:</strong> Spores germinate forming hyphae that penetrate the stratum corneum.</li>
+<li><strong>Enzymatic Digestion:</strong> Proteases and keratinases degrade keratin → nutrients for fungi.</li>
+<li><strong>Immune Response:</strong> Inflammation → erythema, scaling, pustules. Chronic → hyperkeratosis.</li>
+</ul>
+<h3>Environmental Influence</h3>
+<p>Humidity, temperature, and animal density significantly affect disease severity.</p>
+</div>
+<div class="image-content">
+<img src="https://i.pinimg.com/1200x/47/8e/46/478e463a87db54c845a26510abb38825.jpg" alt="Pathogenesis Diagram">
+<img src="https://a-z-animals.com/media/2022/05/ringworm-768x1024.jpg" alt="Fungal Hyphae Microscope">
+</div>
+</section>
+
+<!-- ================= BIO-MECHANICS & TRANSMISSION ================= -->
+<section class="presentation-section" id="bio-mechanics">
+    <div class="text-content">
+        <h2>Bio-Mechanics & Transmission</h2>
+
+        <h3> The Bio-Mechanics of Infection (The Arthrospore)</h3>
+        <ul>
+            <li><strong>The Infective Unit:</strong> Infection is driven by Arthrospores, which are formed by the fragmentation of fungal hyphae within the hair and skin.</li>
+            <li><strong>Environmental Resilience:</strong> Arthrospores possess a thick cell wall that protects them against desiccation and UV light. They remain viable and infectious for up to 18–24 months in the environment.</li>
+            <li><strong>The "Clinging" Mechanism:</strong> Spores are coated with a proteinaceous sticky substance, allowing them to adhere firmly to keratinized surfaces (furniture, brushes, and fabrics).</li>
+            <li><strong>The Silent Threat (Asymptomatic Carriers):</strong> Subclinically infected animals (especially long-haired cats) can harbor thousands of spores in their fur without showing lesions, acting as a primary reservoir for outbreaks.</li>
+        </ul>
+
+        <h3> Routes of Transmission (The Dynamics)</h3>
+        <ul>
+            <li><strong>Direct Transmission (Skin-to-Skin):</strong> Occurs through physical contact between an infected host and a susceptible one. High risk during nursing, grooming, or mating.</li>
+            <li><strong>Indirect Transmission (The Role of Fomites):</strong>
+                <ul>
+                    <li>House Dust: Infected hairs and scales become part of the dust, making the entire environment a source of infection.</li>
+                    <li>Contaminated Tools: Grooming shears, clippers, and brushes are the #1 vectors in clinics and shelters.</li>
+                    <li>Micro-abrasions: Clippers often cause tiny skin nicks that act as "gateways" for immediate fungal entry.</li>
+                </ul>
+            </li>
+            <li><strong>Environmental (Geophilic) Route:</strong> Exposure to contaminated soil containing species like <em>M. gypseum</em>. Infection typically occurs on the muzzle and paws during digging.</li>
+        </ul>
+    </div>
+
+    <div class="image-content">
+    <img src="cat.jpeg" alt="Dog Ringworm Example" class="slide-img">
+</div>
+</section>
+
+<!-- ================= PATHOGENS ================= -->
+<section class="presentation-section" id="species">
+<div class="text-content">
+<h2>Causative Pathogens</h2>
+<h3>Microsporum canis</h3>
+<p>Primary dermatophyte in cats, responsible for zoonotic infections. Highly contagious among kittens and humans.</p>
+
+<h3>Trichophyton verrucosum</h3>
+<p>Prevalent in cattle; produces thick, crusty lesions. Infection can persist in herds if untreated.</p>
+
+<h3>Microsporum gypseum</h3>
+<p>Geophilic fungus from soil. Causes sporadic infections in dogs and cats exposed to contaminated environments.</p>
+</div>
+<div class="image-content">
+<img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Macroconidia_Microsporum_canis.JPG" alt="Fungal Culture">
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Mcanis036.JPG" alt="Microsporum Canis Colonies">
+<img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/2-dermatophyte-fungi-kateryna-konscience-photo-library.jpg"
+</div>
+</section>
+
+<!-- ================= CLINICAL SIGNS ================= -->
+<section class="presentation-section reverse" id="clinical">
+<div class="text-content">
+<h2>Advanced Clinical Manifestations</h2>
+<h3>Feline</h3>
+<p>Circular alopecia with fine scaling ("cigarette ash" appearance). Some cats are asymptomatic carriers, spreading spores.</p>
+
+<h3>Canine</h3>
+<p>Classic ring lesions with crusting. Often accompanied by secondary bacterial infections, leading to pruritus and discomfort.</p>
+
+<h3>Bovine</h3>
+<p>Thick greyish-white crusts mainly on the head, neck, and limbs. Can affect productivity and weight gain in livestock.</p>
+</div>
+<div class="image-content">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3-SK9bKQFKnnqEUAyz8Brnu__WvygHM4Vrw&s" alt="Clinical Signs in Animals">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJIOp2CmHRcihEWbrxvC2uluN392xokzRC5g&s" alt="Feline Lesion Example">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8AFPiX3ZWwO5XMChjB2hDE_S8zaLRUPOAJQ&s"
+</div><img src="https://www.vetsupply.com.au/blog/wp-content/uploads/2016/02/PCS_ring-worms.jpg" alt="Clinical Signs in Animals">
+</section>
+
+<!-- ================= DIAGNOSIS ================= -->
+<section class="presentation-section" id="diagnosis">
+
+<div class="text-content">
+
+<h2>Diagnostic Protocols</h2>
+
+
+<h3>Wood's Lamp</h3>
+<p>
+Fluorescence seen in 50-60% of <strong>Microsporum canis</strong> strains; 
+helps in rapid initial assessment.
+</p>
+
+
+<h3>Trichogram</h3>
+<p>
+Examination of hair shafts in 10-20% KOH allows identification of fungal elements.
+</p>
+
+
+<h3>Dermatophyte Test Medium (DTM)</h3>
+<p>
+Color change from orange to red indicates alkaline metabolites from dermatophytes,
+confirming infection.
+</p>
+
+
+<h3>Laboratory Diagnostics</h3>
+
+<p>Direct Microscopic Examination (KOH Prep):</p>
+
+<ul>
+<li>Skin scrapings, hair, or nail clippings are placed in a 10% to 20% Potassium Hydroxide (KOH) solution.</li>
+
+<li>
+<strong>The Science:</strong>
+The KOH dissolves keratin but leaves fungal hyphae and spores intact.
+</li>
+
+<li>
+<strong>Observation:</strong>
+Look for branching, septate hyphae under microscope.
+</li>
+
+</ul>
+
+
+<p>Physiological & Advanced Tests:</p>
+
+<ul>
+
+<li>
+<strong>In-vitro Hair Perforation Test:</strong>
+Differentiates <em>T. mentagrophytes</em> (Positive)
+from <em>T. rubrum</em> (Negative).
+</li>
+
+<li>
+Positive result shows wedge-shaped perforations stained with LPCB.
+</li>
+
+<li>
+<strong>PCR (Molecular Detection):</strong>
+Detects fungal DNA directly from samples,
+fast result (1-3 days) with high sensitivity.
+</li>
+
+</ul>
+
+</div>
+
+
+
+<div class="image-content">
+
+<img src="test.jpeg">
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUg9JZMUzA_0Zvm5ahcuSOMb_nbRdv8QkHvw&s">
+
+<img src="https://ohiostate.pressbooks.pub/app/uploads/sites/167/2020/06/trichogram-hair-root-300x210.png">
+
+<img src="https://m.media-amazon.com/images/I/51LtntkLONL._AC_UF350,350_QL80_.jpg">
+
+</div>
+
+
+
+</section>
+<!-- ================= VIDEO SECTION ================= -->
+
+<section class="video-section">
+
+    <h2 class="video-title">Diagnostic Demonstration</h2>
+
+    <div class="video-box">
+
+        <video controls>
+            <source src="malak.mp4" type="video/mp4">
+        </video>
+
+    </div>
+
+</section>
+
+
+</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veterinary Dermatophytosis | Professional Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"> <!-- CSS العام -->
+<link rel="stylesheet" href="table.css"> <!-- CSS الجدول المنفصل -->
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">VET. DERMATOPHYTOSIS</div>
+    <nav>
+        <a href="#about">Definition</a>
+        <a href="#species">Pathogens</a>
+        <a href="#pathogenesis">Mechanism</a>
+        <a href="#clinical">Clinical</a>
+        <a href="#diagnosis">Diagnosis</a>
+        <a href="#differential">Differential</a>
+        <a href="#video-section">Video</a>
+    </nav>
+</header>
+
+<div class="container">
+
+<section class="diff-section">
+
+    <h2 class="diff-title">Differential Diagnosis</h2>
+
+    <p class="diff-text">
+    Detailed differential diagnosis of dermatophytosis in different animal species.
+    Clinical appearance varies between hosts and may mimic many dermatological diseases.
+    Accurate diagnosis requires careful comparison of lesions, history, and laboratory tests.
+    </p>
+
+    <div class="table-box">
+        <table class="modern-table colorful-table">
+
+            <tr>
+                <th>Species</th>
+                <th>Description</th>
+                <th>Common Mimics</th>
+                <th>Lesions / Location</th>
+                <th>Special Conditions</th>
+                <th>Diagnosis Notes</th>
+            </tr>
+
+
+            <!-- DOG -->
+            <tr class="dog">
+                <td>Dog</td>
+
+                <td>
+                In dogs, dermatophytosis is known as the "Great Pretender" because the clinical signs
+                closely resemble other common skin diseases.
+                </td>
+
+                <td>
+                Demodicosis (Demodectic mange) <br>
+                Bacterial pyoderma
+                </td>
+
+                <td>
+                Alopecia, scaling, crusting, erythema, follicular papules. <br>
+                Expanding circular lesions usually on snout and extremities.
+                </td>
+
+                <td>
+                Lesions often asymmetric and progressive.
+                </td>
+
+                <td>
+                Any circular alopecia must be suspected as ringworm until confirmed by
+                DTM culture or Trichogram.
+                </td>
+            </tr>
+
+
+            <!-- CAT -->
+            <tr class="cat">
+                <td>Cat</td>
+
+                <td>
+                Diagnosis in cats is difficult because they can act as invisible carriers of infection.
+                </td>
+
+                <td>
+                Demodicosis <br>
+                Pyoderma
+                </td>
+
+                <td>
+                Patchy alopecia, crusting, erythema on face and ears (pinna).
+                </td>
+
+                <td>
+                Long-haired cats may carry thousands of spores without lesions.
+                Kerion may occur due to M. gypseum or T. mentagrophytes.
+                </td>
+
+                <td>
+                Always suspect dermatophytosis even if the cat appears normal.
+                Culture is required to confirm infection.
+                </td>
+            </tr>
+
+
+            <!-- CATTLE -->
+            <tr class="cattle">
+                <td>Cattle</td>
+
+                <td>
+                In cattle, dermatophytosis is often called "Winter Disease"
+                because it spreads rapidly in crowded indoor housing.
+                </td>
+
+                <td>
+                Nutritional deficiency <br>
+                Other herd skin diseases
+                </td>
+
+                <td>
+                Thick grey-white crusty plaques mainly on head and neck.
+                </td>
+
+                <td>
+                High transmissibility in herds.
+                Housing conditions increase infection risk.
+                </td>
+
+                <td>
+                Early differentiation is important to prevent herd outbreak.
+                Diagnosis by culture, PCR, and clinical signs.
+                </td>
+            </tr>
+
+
+            <!-- HORSE -->
+            <tr class="human">
+                <td>Horse</td>
+
+                <td>
+                In horses, lesion location is the main diagnostic clue.
+                Often called "Girth Itch".
+                </td>
+
+                <td>
+                Contact dermatitis <br>
+                Saddle sores <br>
+                Mechanical irritation
+                </td>
+
+                <td>
+                Alopecia and crusting at tack, girth, or harness areas.
+                </td>
+
+                <td>
+                Caused by friction and contaminated equipment.
+                </td>
+
+                <td>
+                Must differentiate from equipment injury.
+                Confirm fungal infection before treatment.
+                </td>
+            </tr>
+
+
+            <!-- SMALL RUMINANTS -->
+            <tr class="dog">
+                <td>Sheep / Swine</td>
+
+                <td>
+                Infection commonly affects sensitive areas of the body.
+                Management practices play a major role in susceptibility.
+                </td>
+
+                <td>
+                Parasitic skin disease <br>
+                Environmental irritation
+                </td>
+
+                <td>
+                Circular crusted lesions on face, eyes, and ears.
+                </td>
+
+                <td>
+                Show lambs highly susceptible because washing removes lanolin,
+                which normally protects the skin.
+                </td>
+
+                <td>
+                Frequent washing increases risk.
+                Good hygiene and environmental control required.
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+
+</section>
+</div>
+
+</body>
+</html>
+
+</section>
+
+</div>
+<!-- ================= TREATMENT & CONTROL ================= -->
+<section class="presentation-section" id="treatment">
+    <div class="text-content">
+        <h2>Treatment & Control</h2>
+        <p>The choice of treatment depends primarily on the location and severity of the infection.</p>
+
+        <h3>A. Topical Treatments (For Skin and Body)</h3>
+        <p>Used for localized infections like <strong>Tinea Corporis</strong> (body) or <strong>Tinea Pedis</strong> (athlete's foot).</p>
+        <ul>
+            <li><strong>Antifungal Creams/Ointments:</strong> Over-the-counter or prescription options containing Terbinafine, Clotrimazole, or Ketoconazole.</li>
+            <li><strong>Application:</strong> Apply the cream to the lesion and about 2 cm of healthy skin surrounding it. Continue use for at least 7–14 days after the skin appears clear to prevent recurrence.</li>
+        </ul>
+
+        <h3>B. Oral Medications (For Scalp and Nails)</h3>
+        <p>Topical creams cannot penetrate hair shafts or nail beds effectively.</p>
+        <ul>
+            <li><strong>Tinea Capitis (Scalp):</strong> Requires oral antifungal medications (e.g., Griseofulvin or Terbinafine) for 4–8 weeks.</li>
+            <li><strong>Onychomycosis (Nails):</strong> May require oral treatment for 3–6 months.</li>
+            <li><strong>Note:</strong> Oral antifungals may require periodic blood tests to monitor liver function.</li>
+        </ul>
+
+        <h3>2. Prevention (Lifestyle & Hygiene)</h3>
+        <p>Preventing dermatophytosis is all about "Starving the Fungus" of the moisture and contact it needs to spread.</p>
+
+        <h4>Personal Hygiene</h4>
+        <ul>
+            <li><strong>Keep it Dry:</strong> Fungus loves dampness. Dry your skin thoroughly after showering, especially between the toes and in skin folds (groin, armpits).</li>
+            <li><strong>Loose Clothing:</strong> Wear breathable cotton fabrics and avoid tight synthetic underwear or socks that trap sweat.</li>
+            <li><strong>Daily Laundry:</strong> Wash your towels, bedding, and clothes in hot water during an active infection to kill fungal spores.</li>
+        </ul>
+
+        <h4>Environmental Control</h4>
+        <ul>
+            <li><strong>Don't Share:</strong> Never share personal items like towels, razors, hairbrushes, or unwashed gym gear.</li>
+            <li><strong>Footwear in Public:</strong> Always wear flip-flops or sandals in communal showers, locker rooms, and around swimming pools.</li>
+            <li><strong>Disinfect Surfaces:</strong> Clean shared gym equipment or mats before use.</li>
+        </ul>
+
+        <h4>Animal Safety</h4>
+        <ul>
+            <li><strong>Check Pets:</strong> If your cat or dog has patches of missing fur or is scratching excessively, take them to the vet. Pets are a primary source of transmission to humans.</li>
+        </ul>
+
+    </div>
+
+    <div class="image-content">
+        <img src="cream.jpeg" alt="Topical Antifungal Treatment">
+        <img src="control.jpeg" alt="Oral Medications">
+        <img src="https://humanepro.org/sites/default/files/styles/article_new/public/images/hero/ringworm-in-cat-sulfur-treatment.jpg?itok=B41ouVLo" alt="Oral Medications">
+        <img src="https://cdn-ilbfemn.nitrocdn.com/SMbNqQVgokVBOKPHqgPbhvowhPKWFJah/assets/images/optimized/rev-f13438f/canna-pet.com/wp-content/uploads/2018/01/ringworm-in-dog1812_06.jpg" alt="Environmental Hygiene">
+        <img src="https://cdn.storymd.com/optimized/Qd9lrzSgog/thumbnail.jpg" alt="Animal Safety">
+    </div>
+</section>
+<section class="section video-highlight" id="video-section">
+<h2>Medical Visualization</h2>
+<div class="video-container">
+<video controls class="demo-video">
+<source src="gg.MP4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+</div>
+</section>
+
+<footer>
+Veterinary Dermatophytosis Scientific Resource | &copy; 2024
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
