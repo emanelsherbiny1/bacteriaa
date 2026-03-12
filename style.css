@@ -1,0 +1,386 @@
+/* الألوان والخطوط */
+:root {
+    --primary-color: #00ffa6;
+    --bg-dark: #03040a;
+    --text-light: #e0e0e0;
+    --font-main: 'Source Sans Pro', sans-serif;
+    --font-title: 'Playfair Display', serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    background: var(--bg-dark);
+    color: var(--text-light);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+    line-height: 1.8;
+}
+
+#bacteriaCanvas { position:fixed; top:0; left:0; z-index:-3; }
+
+/* Navbar التنسيق */
+.navbar {
+    position:fixed; width:100%; top:0; display:flex; 
+    align-items:center; justify-content:space-between; 
+    padding:15px 50px; background:rgba(0,0,0,0.8); 
+    backdrop-filter:blur(10px); z-index:100;
+    border-bottom: 1px solid rgba(0,255,166,0.2);
+}
+
+.logo { font-family: var(--font-title); color: var(--primary-color); font-size: 22px; letter-spacing: 1px; }
+
+nav a { text-decoration:none; color:white; margin-left: 20px; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
+nav a:hover { color: var(--primary-color); }
+
+/* Hero Section */
+.hero { height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; }
+.bg-video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-2; filter: brightness(0.4); }
+.hero h1 { font-family: var(--font-title); font-size: 75px; margin-bottom: 20px; }
+.hero span { color: var(--primary-color); }
+
+/* Presentation Sections */
+.container { max-width: 1200px; margin: 0 auto; padding: 50px 20px; }
+
+.presentation-section {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 100px;
+    background: rgba(255,255,255,0.03);
+    padding: 40px;
+    border-radius: 30px;
+    border-left: 5px solid var(--primary-color);
+    transition: 0.4s;
+}
+
+.presentation-section:hover { background: rgba(255,255,255,0.05); transform: scale(1.02); }
+
+.presentation-section.reverse { flex-direction: row-reverse; border-left: none; border-right: 5px solid var(--primary-color); }
+
+.text-content { flex: 1; }
+.text-content h2 { 
+    font-family: var(--font-title); 
+    font-size: 42px; 
+    color: var(--primary-color); 
+    margin-bottom: 20px; 
+}
+
+.text-content p { font-size: 19px; margin-bottom: 15px; text-align: justify; }
+
+.image-content { flex: 1; display: flex; justify-content: center; }
+.image-content img { 
+    width: 100%; 
+    max-width: 450px; 
+    border-radius: 20px; 
+    box-shadow: 0 0 30px rgba(0,255,166,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Lists and Items */
+ul, ol { padding-left: 20px; font-size: 18px; }
+li { margin-bottom: 10px; }
+.species-grid { display: grid; gap: 15px; margin-top: 20px; }
+.spec-item { background: rgba(0,255,166,0.1); padding: 15px; border-radius: 10px; }
+
+/* Video Highlight */
+.video-highlight { text-align: center; padding: 100px 0; background: #05070a; }
+.video-container video { width: 80%; border-radius: 20px; border: 2px solid var(--primary-color); }
+
+/* Credits & Footer */
+.credits-box { background: rgba(0,0,0,0.6); padding: 30px; border-radius: 20px; border: 1px solid var(--primary-color); }
+.students { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px; }
+.students span { font-size: 12px; background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 5px; }
+footer { padding: 40px; text-align: center; opacity: 0.6; font-size: 14px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .presentation-section, .presentation-section.reverse { flex-direction: column; text-align: center; }
+    .hero h1 { font-size: 45px; }
+}
+/* ===== NEW COLOR FIX ===== */
+
+:root{
+    --bg-dark:#0b0f1a;
+    --text-light:#ffffff;
+    --primary-color:#00e0ff;
+}
+
+body{
+    background: linear-gradient(180deg,#0b0f1a,#10182a,#0b0f1a);
+    color:#ffffff;
+}
+
+.presentation-section{
+    background: rgba(255,255,255,0.07);
+}
+
+.presentation-section:hover{
+    background: rgba(255,255,255,0.12);
+}
+
+.text-content p{
+    color:#f0f0f0;
+}
+
+.navbar{
+    background: rgba(5,10,20,0.9);
+}
+
+.video-highlight{
+    background:#0b1325;
+}/* ===== BUTTON FIX ===== */
+
+#exploreBtn{
+    margin-top:30px;
+    padding:15px 40px;
+    font-size:18px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    font-weight:bold;
+    letter-spacing:1px;
+
+    background: linear-gradient(45deg,#00e0ff,#00ffa6);
+    color:#001018;
+
+    box-shadow:0 0 20px rgba(0,255,200,0.4);
+    transition:0.3s;
+}
+
+#exploreBtn:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 40px rgba(0,255,200,0.8);
+}.bg-video{
+    filter: brightness(0.5) contrast(1.2);
+}.presentation-section .image-content img {
+    max-width: 100%;   /* ما يتعداش عرض السكشن */
+    height: auto;      /* يحافظ على نسبة الطول للعرض */
+    margin-bottom: 15px; /* مسافة بسيطة بين الصور لو أكتر من صورة */
+    border-radius: 8px; /* شكل أجمل */
+}.presentation-section .image-content {
+    display: flex;
+    flex-wrap: wrap;      /* الصور تنتقل للسطر التاني لو محتاجة */
+    gap: 10px;            /* مسافة بين الصور */
+}
+
+.presentation-section .image-content img {
+    flex: 1 1 45%;        /* كل صورة تاخد حوالي نص السكشن */
+    max-width: 45%;       
+    height: auto;
+}
+:root {
+    --primary-color: #00e0ff;
+    --secondary-color: #ffb400;
+    --bg-dark: #0b0f1a;
+    --text-light: #f0f0f0;
+    --font-main: 'Source Sans Pro', sans-serif;
+    --font-title: 'Playfair Display', serif;
+}
+
+body {
+    margin:0; padding:0; box-sizing:border-box;
+    font-family: var(--font-main);
+    color: var(--text-light);
+    background: linear-gradient(180deg,#0b0f1a,#10182a,#0b0f1a);
+    overflow-x: hidden;
+    line-height: 1.8;
+}
+
+#bacteriaCanvas { position:fixed; top:0; left:0; z-index:-3; }
+
+/* ===== NAVBAR ===== */
+.navbar {
+    position:fixed; width:100%; top:0; display:flex;
+    align-items:center; justify-content:space-between;
+    padding:15px 50px; background:rgba(5,10,20,0.9);
+    backdrop-filter:blur(10px); z-index:100;
+    border-bottom: 1px solid rgba(0,255,166,0.2);
+}
+.logo { font-family: var(--font-title); color: var(--primary-color); font-size: 22px; letter-spacing: 1px; }
+nav a { text-decoration:none; color:white; margin-left: 20px; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
+nav a:hover { color: var(--primary-color); }
+
+/* ===== HERO ===== */
+.hero { height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; }
+.bg-video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-2; filter: brightness(0.5) contrast(1.2); }
+.hero h1 { font-family: var(--font-title); font-size: 75px; margin-bottom: 20px; }
+.hero span { color: var(--primary-color); }
+
+/* ===== BUTTON ===== */
+#exploreBtn{
+    margin-top:30px; padding:15px 40px; font-size:18px;
+    border:none; border-radius:50px; cursor:pointer; font-weight:bold; letter-spacing:1px;
+    background: linear-gradient(45deg,#00e0ff,#00ffa6);
+    color:#001018;
+    box-shadow:0 0 20px rgba(0,255,200,0.4); transition:0.3s;
+}
+#exploreBtn:hover{
+    transform:scale(1.1); box-shadow:0 0 40px rgba(0,255,200,0.8);
+}
+
+/* ===== PRESENTATION SECTIONS ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 50px 20px; }
+
+.presentation-section {
+    display: flex; align-items: flex-start; gap: 50px; margin-bottom: 100px;
+    background: rgba(255,255,255,0.07); padding: 40px;
+    border-radius: 30px; border-left: 5px solid var(--primary-color);
+    transition: 0.4s;
+}
+.presentation-section:hover { background: rgba(255,255,255,0.12); transform: scale(1.02); }
+.presentation-section.reverse { flex-direction: row-reverse; border-left: none; border-right: 5px solid var(--primary-color); }
+
+.text-content { flex: 1; }
+.text-content h2 {
+    font-family: var(--font-title); font-size: 48px; color: var(--primary-color); margin-bottom: 25px;
+}
+.text-content h3 {
+    font-family: var(--font-title); font-size: 28px; color: var(--secondary-color); margin-bottom: 15px;
+}
+.text-content p { font-size: 18px; margin-bottom: 15px; text-align: justify; }
+.text-content ul, .text-content ol { padding-left: 20px; margin-bottom: 15px; }
+.text-content li { margin-bottom: 10px; font-size: 17px; }
+
+.image-content { flex: 1; display: flex; flex-wrap: wrap; gap: 15px; justify-content:center; }
+.image-content img {
+    flex: 1 1 45%; max-width: 45%; height: auto; border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0,255,166,0.2); border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ===== VIDEO HIGHLIGHT ===== */
+.video-highlight { text-align: center; padding: 100px 0; background: #0b1325; }
+.video-container video { width: 80%; border-radius: 20px; border: 2px solid var(--primary-color); }
+
+/* ===== CREDITS & FOOTER ===== */
+.credits-box { background: rgba(0,0,0,0.6); padding: 30px; border-radius: 20px; border: 1px solid var(--primary-color); }
+.students { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px; }
+.students span { font-size: 12px; background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 5px; }
+footer { padding: 40px; text-align: center; opacity: 0.6; font-size: 14px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .presentation-section, .presentation-section.reverse { flex-direction: column; text-align: center; }
+    .hero h1 { font-size: 45px; }
+    .image-content img { max-width: 100%; flex: 1 1 100%; }
+}
+/* ================= BIG ACADEMIC TABLE ================= */
+
+/* ================= BIG COLORFUL TABLE ================= */
+.diff-section {
+    width: 96%;
+    margin: 120px auto;
+    padding: 60px;
+    background: #0b0f2a;
+    border-radius: 15px;
+}
+
+.diff-title {
+    font-size: 65px;
+    text-align: center;
+    color: #00e0ff;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.diff-text {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #ddd;
+}
+
+/* Table Box */
+.table-box {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 40px;
+}
+
+/* Modern Table Base */
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 22px;
+}
+
+/* Headers */
+.modern-table th {
+    border: 2px solid #091826;
+    padding: 20px;
+    font-size: 26px;
+    background: #5aa2ab;
+    color: black;
+    font-weight: bold;
+}
+
+/* Cells */
+.modern-table td {
+    border: 2px solid white;
+    padding: 20px;
+    font-size: 22px;
+    text-align: center;
+    color: #fff;
+}
+
+/* Colorful Rows */
+.colorful-table tr.dog { background: #f3bfdc; }
+.colorful-table tr.cat { background: #a9d5ff; }
+.colorful-table tr.cattle { background: #efddaa; }
+.colorful-table tr.human { background: #aecd9e; }
+
+/* Hover Effect */
+.colorful-table tr:hover {
+    background: #30315c !important;
+    color: rgb(150, 144, 144);
+    transform: scale(1.02);
+    transition: 0.3s;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .diff-title { font-size: 50px; }
+    .diff-text { font-size: 20px; }
+    .modern-table th, .modern-table td { font-size: 18px; padding: 15px; }
+}
+/* Treatment & Control Images */
+#treatment .image-content {
+    display: flex;
+    flex-direction: column; /* يخلي الصور تحت بعض */
+    gap: 20px; /* المسافة بين كل صورة */
+    align-items: center; /* لو عايزة الصور في النص */
+}
+
+#treatment .image-content img {
+    width: 80%; /* حجم الصورة داخل السكشن */
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0,255,166,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+} /* ===== LAB DIAGNOSTICS ===== */
+.text-content h3 {
+    font-family: var(--font-title);
+    font-size: 32px;
+    color: var(--secondary-color);
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.text-content ul {
+    padding-left: 25px;
+    margin-bottom: 20px;
+}
+
+.text-content li {
+    margin-bottom: 12px;
+    font-size: 18px;
+    line-height: 1.6;
+}  .slide-img {
+    width: 80% !important;       /* حجم أكبر */
+    max-width: 800px !important; /* أقصى عرض */
+    height: auto !important;     /* يحافظ على النسبة الطولية */
+    display: block !important;   /* يضمن تمركز الصورة */
+    margin: 30px auto !important; /* مسافة فوق وتحت + مركز الصورة */
+    border-radius: 15px !important;
+    box-shadow: 0 0 25px rgba(0, 255, 166, 0.3) !important;
+    flex: unset !important;      /* يمنع flex من التحكم في حجم الصورة */
+}
